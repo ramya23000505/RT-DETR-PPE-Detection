@@ -1,40 +1,36 @@
 # Constrained Object Detection & Reasoning API (RT-DETR)
 
-An end-to-end Computer Vision & Applied ML system fine-tuned on the real-world **Atharion PPE Detection Dataset (tharion-v1.0-public)** using **RT-DETR** (
-tdetr-l.pt), featuring a handwritten, deterministic reasoning layer and FastAPI endpoints.
+An end-to-end Computer Vision & Applied ML system fine-tuned on the real-world **Atharion PPE Detection Dataset (`atharion-v1.0-public`)** using **RT-DETR** (`rtdetr-l.pt`), featuring a handwritten, deterministic reasoning layer and FastAPI endpoints.
 
 ---
 
 ## Architecture & Workflow
 
-`	ext
-                                [ User Question ]
-                                        |
-                          [ Handwritten Intent Router ]
-                                        |
-           +----------------------------+----------------------------+
-           |                                                         |
-[ Unrelated / Out-of-Scope ]                                [ Image-Related Query ]
-           |                                                         |
-  Returns Non-Image Response                                 [ RT-DETR Inference ]
-   (RT-DETR NOT Called)                                              |
-                                                            [ Structured Detections ]
-                                                                     |
-                                                       [ Geometric Association Logic ]
-                                                          (IoU / Box Containment)
-                                                                     |
-                                                        [ Deterministic Guardrail ]
-                                                                     |
-                                           +-------------------------+-------------------------+
-                                           |                                                   |
-                             [ Insufficient Evidence ]                           [ Sufficient Evidence ]
-                                           |                                                   |
-                             Returns "Insufficient info..."                        [ Google Gemini LLM ]
-                                 (Gemini NOT Called)                                           |
-                                                                                    Plain-Language Answer
-`
-
----
+```text
+                        [ User Question ]
+                                |
+                    [ Handwritten Intent Router ]
+                                |
+           +--------------------+--------------------+
+           |                                         |
+[ Unrelated / Out-of-Scope ]               [ Image-Related Query ]
+           |                                         |
+  Returns Non-Image Response                 [ RT-DETR Inference ]
+    (RT-DETR NOT Called)                             |
+                                           [ Structured Detections ]
+                                                     |
+                                           [ Geometric Association Logic ]
+                                              (IoU / Box Containment)
+                                                     |
+                                           [ Deterministic Guardrail ]
+                                                     |
+                           +-------------------------+-------------------------+
+                           |                                                   |
+               [ Insufficient Evidence ]                             [ Sufficient Evidence ]
+                           |                                                   |
+               Returns "Insufficient info..."                        [ Google Gemini LLM ]
+                   (Gemini NOT Called)                                         |
+                                                                     Plain-Language Answer
 
 ## Real-World Dataset Statistics & Compliance
 
