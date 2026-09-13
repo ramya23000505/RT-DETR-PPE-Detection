@@ -61,55 +61,62 @@ tdetr-l.pt).
 ## Quickstart & Installation
 
 ### 1. Environment Setup
-`ash
+```ash
 python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On Linux/macOS:
-source venv/bin/activate
+```
 
+# On Windows:
+```
+venv\Scripts\activate
+```
+# On Linux/macOS:
+```
+source venv/bin/activate
+```
+
+```
 pip install -r requirements.txt
-`
+```
 
 ### 2. Dataset Verification (Step 0)
-`ash
+```ash
 python src/data/verify_dataset.py
-`
+```
 
 ### 3. Model Training (Part A)
-`ash
+```ash
 python src/models/train.py --data dataset/dataset.yaml --epochs 10 --batch 8 --imgsz 640 --device cpu --seed 42
-`
+```
 
 ### 4. Model Evaluation on Held-Out Test Set
-`ash
+```ash
 python src/models/evaluate.py --weights runs/detect/runs/rtdetr_ppe_final/weights/best.pt --data dataset/dataset.yaml --split test
-`
+```
 
 ### 5. Run All 15 Unit & API Tests
-`ash
+```ash
 python -m pytest tests/test_reasoning.py tests/test_api.py
-`
+```
 
 ### 6. Launch FastAPI Backend
-`ash
+```ash
 python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-`
+```
 
 ---
 
 ## Docker Containerization (Bonus 10%)
 
 ### Build & Run Docker Container:
-`ash
+```ash
 docker build -t rt-detr-ppe .
 docker run -p 8000:8000 rt-detr-ppe
-`
+```
 
 ### Or using Docker Compose:
-`ash
+```ash
 docker-compose up --build
-`
+```
 
 ---
 
@@ -119,9 +126,9 @@ docker-compose up --build
 Accepts an image and returns detected bounding boxes, classes, and confidences.
 
 **Example Request:**
-`ash
+```ash
 curl -X POST "http://localhost:8000/detect" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "file=@test_image.jpg"
-`
+```
 
 **Example Response:**
 ```json
@@ -158,9 +165,9 @@ Accepts an image and returns a rendered PNG image showing 2D bounding boxes and 
 Accepts an image and a natural-language question. Performs handwritten intent routing, spatial relationship analysis, deterministic guardrails, and structured LLM reasoning.
 
 **Example Request 1 (Compliant Query):**
-`ash
+```ash
 curl -X POST "http://localhost:8000/reason" -F "question=Is everyone in this image wearing a hard hat and safety vest?" -F "file=@test_image.jpg"
-`
+```
 
 **Example Response 1:**
 ```json
@@ -188,9 +195,9 @@ curl -X POST "http://localhost:8000/reason" -F "question=Is everyone in this ima
 ```
 
 **Example Request 2 (Out-of-Scope Query - RT-DETR Skipped):**
-`ash
+```ash
 curl -X POST "http://localhost:8000/reason" -F "question=What is the capital of France?" -F "file=@test_image.jpg"
-`
+```
 
 **Example Response 2:**
 ```json
@@ -205,9 +212,9 @@ curl -X POST "http://localhost:8000/reason" -F "question=What is the capital of 
 ```
 
 **Example Request 3 (Insufficient Information Trigger):**
-`ash
+```ash
 curl -X POST "http://localhost:8000/reason" -F "question=What color shoes is the worker wearing?" -F "file=@test_image.jpg"
-`
+```
 
 **Example Response 3:**
 ```json
