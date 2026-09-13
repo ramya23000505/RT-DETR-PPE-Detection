@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  rt-detr-api:
+    build: .
+    container_name: rt_detr_ppe_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/runs/rtdetr_ppe_final/weights/best.pt
+      # Optional: Part B uses a deterministic fallback when this is unset.
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+    restart: unless-stopped

@@ -1,0 +1,12 @@
+ultralytics==8.4.146
+torch==2.14.0
+torchvision
+fastapi==0.141.1
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+google-genai==2.23.0
+requests==2.32.3
+pillow==11.1.0
+pyyaml==6.0.2
+pytest==9.1.1
+httpx==0.28.1
