@@ -2,3 +2,8 @@
 *.zip
 runs/
 *.pt
+
+dataset/
+runs/
+*.zip
+*.pt
