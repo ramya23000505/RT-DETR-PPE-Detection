@@ -31,6 +31,8 @@ An end-to-end Computer Vision & Applied ML system fine-tuned on the real-world *
                Returns "Insufficient info..."                        [ Google Gemini LLM ]
                    (Gemini NOT Called)                                         |
                                                                      Plain-Language Answer
+```
+
 
 ## Real-World Dataset Statistics & Compliance
 
@@ -122,7 +124,7 @@ curl -X POST "http://localhost:8000/detect" -H "accept: application/json" -H "Co
 `
 
 **Example Response:**
-`json
+```json
 {
   "success": true,
   "num_detections": 2,
@@ -147,7 +149,7 @@ curl -X POST "http://localhost:8000/detect" -H "accept: application/json" -H "Co
   ],
   "inference_time_ms": 42.5
 }
-`
+```
 
 ### Endpoint 2: POST /detect/visualize (Bonus Endpoint)
 Accepts an image and returns a rendered PNG image showing 2D bounding boxes and class labels.
@@ -161,7 +163,7 @@ curl -X POST "http://localhost:8000/reason" -F "question=Is everyone in this ima
 `
 
 **Example Response 1:**
-`json
+```json
 {
   "success": true,
   "decision": "structured_reasoning_success",
@@ -183,7 +185,7 @@ curl -X POST "http://localhost:8000/reason" -F "question=Is everyone in this ima
     }
   }
 }
-`
+```
 
 **Example Request 2 (Out-of-Scope Query - RT-DETR Skipped):**
 `ash
@@ -191,7 +193,7 @@ curl -X POST "http://localhost:8000/reason" -F "question=What is the capital of 
 `
 
 **Example Response 2:**
-`json
+```json
 {
   "success": true,
   "decision": "unrelated_query",
@@ -200,7 +202,7 @@ curl -X POST "http://localhost:8000/reason" -F "question=What is the capital of 
   "answer": "This question is unrelated to the visual contents of the image.",
   "evidence": {}
 }
-`
+```
 
 **Example Request 3 (Insufficient Information Trigger):**
 `ash
@@ -208,7 +210,7 @@ curl -X POST "http://localhost:8000/reason" -F "question=What color shoes is the
 `
 
 **Example Response 3:**
-`json
+```json
 {
   "success": true,
   "decision": "insufficient_information",
@@ -217,4 +219,4 @@ curl -X POST "http://localhost:8000/reason" -F "question=What color shoes is the
   "answer": "Insufficient information to answer confidently. Asking about 'shoe' which is outside the model detection bounding box class taxonomy (person, hard-hat, safety-vest).",
   "evidence": {}
 }
-`
+```
