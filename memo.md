@@ -75,7 +75,7 @@ Part B implements a handwritten, deterministic decision pipeline (**NO LangChain
 ### Out-of-Vocabulary Attribute Example
 - **User Question**: *"What color shoes is the worker wearing?"*
 - **Model Output / Guardrail Decision**:
-`json
+```json
 {
   "decision": "insufficient_information",
   "insufficient_information": true,
@@ -83,5 +83,5 @@ Part B implements a handwritten, deterministic decision pipeline (**NO LangChain
   "answer": "Insufficient information to answer confidently. Asking about 'shoe' which is outside the model detection bounding box class taxonomy (person, hard-hat, safety-vest).",
   "evidence": {}
 }
-`
+```
 *Result*: The confidence guardrail deterministically aborts LLM inference, preventing hallucination or ungrounded guessing.
