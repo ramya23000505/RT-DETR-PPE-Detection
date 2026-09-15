@@ -32,7 +32,31 @@ An end-to-end Computer Vision & Applied ML system fine-tuned on the real-world *
                    (Gemini NOT Called)                                         |
                                                                      Plain-Language Answer
 ```
+## Project Architecture & Directory Structure
 
+The system is organized into a modular structure separating data pipelines, model training and evaluation scripts, FastAPI backend endpoints, deterministic reasoning logic, and automated tests.
+
+```text
+RT-DETR-PPE-Detection/
+│
+├── app/                      # FastAPI application backend
+│   ├── __init__.py
+│   ├── main.py               # Application entry point, routing, and middleware
+│   └── routers/              # API endpoints (/detect, /detect/visualize, /reason)
+│
+├── src/                      # Core machine learning & data processing logic
+│   ├── data/                 # Dataset download, preparation, and integrity verification scripts
+│   └── models/               # Fine-tuning scripts (train.py) and evaluation harnesses (evaluate.py)
+│
+├── tests/                    # Automated testing suite
+│   ├── test_api.py           # FastAPI endpoint integration and payload validation tests
+│   └── test_reasoning.py     # Unit tests for the deterministic intent router & spatial logic
+│
+├── Dockerfile                # Container definition for reproducible deployment
+├── docker-compose.yml        # Multi-container orchestration configuration
+├── requirements.txt          # Pinned Python package dependencies
+└── README.md                 # Project documentation
+```
 
 ## Real-World Dataset Statistics & Compliance
 
